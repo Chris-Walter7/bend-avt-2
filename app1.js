@@ -1,8 +1,8 @@
 const http = require('http');
 const os = require("os");
 const userInfo = os.userInfo();
-const uid = 'test_db';
-const name = userInfo.username;
+const uid = userInfo.uid;
+const name = 'test_db';
 const hostname = '0.0.0.0';
 const port = 3000;
 const MongoClient = require("mongodb").MongoClient;
@@ -18,9 +18,9 @@ async function run() {
 // выполняем пинг для проверки подключения
         const result = await db.command({ ping: 1 });
         console.log("Подключение с сервером успешно установлено");
-        const collection = db.collection("users");
+        const collection = db.collection("rests");
         count = await collection.countDocuments();
-        console.log(`В коллекции users ${count} документа/ов`);
+        console.log(`В коллекции rests ${count} документа/ов`);
         console.log(result);
     }catch(err) {
         console.log("Возникла ошибка");
